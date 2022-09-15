@@ -22,7 +22,7 @@ fetch("./texts.json")
 // checks the user typed character and displays accordingly
 const typeController = (e) => {
   const newLetter = e.key;
-
+ 
   // Handle backspace press
   if (newLetter == "Backspace") {
     userText = userText.slice(0, userText.length - 1);
@@ -46,6 +46,7 @@ const typeController = (e) => {
     display.innerHTML += `<span class="green">${newLetter === " " ? "▪" : newLetter}</span>`;
   } else {
     display.innerHTML += `<span class="red">${newLetter === " " ? "▪" : newLetter}</span>`;
+    errorCount++;
   }
 
   // check if given question text is equal to user typed text
@@ -58,12 +59,12 @@ const validate = (key) => {
   if (key === questionText[userText.length - 1]) {
     return true;
   }
-  return false;
+   return false;
 };
 
 // FINISHED TYPING
 const gameOver = () => {
-  document.removeEventListener("keydown", typeController);
+  document.addEventListener("keydown", typeController);
   // the current time is the finish time
   // so total time taken is current time - start time
   const finishTime = new Date().getTime();
@@ -78,7 +79,7 @@ const gameOver = () => {
   // make it inactive
   display.classList.add("inactive");
   // show result
-  resultModal.innerHTML += `
+  resultModal.innerHTML = `
     <h1>Finished!</h1>
     <p>You took: <span class="bold">${timeTaken}</span> seconds</p>
     <p>You made <span class="bold red">${errorCount}</span> mistakes</p>
@@ -100,7 +101,6 @@ const closeModal = () => {
 };
 
 const start = () => {
-  // console.log("dkjfkdl")
   // If already started, do not start again
   if (startTime) return;
 
@@ -113,10 +113,9 @@ const start = () => {
     // finished timer
     if (count == 0) {
       // -------------- START TYPING -----------------
-      document.addEventListener("keydown", typeController);
-      countdownOverlay.style.display = "flex";
+       document.addEventListener("keydown", typeController );
+      countdownOverlay.style.display = "none";
       display.classList.remove("inactive");
-
       clearInterval(startCountdown);
       startTime = new Date().getTime();
     }
@@ -125,7 +124,7 @@ const start = () => {
 };
 
 // START Countdown
-startBtn.addEventListener("click",  start());
+startBtn.addEventListener("click",  start);
 
 // If history exists, show it
 displayHistory();
