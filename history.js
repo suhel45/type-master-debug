@@ -3,7 +3,7 @@ const histories = document.getElementById("histories");
 
 function addHistory(questionText, timeTaken, errorCount) {
   const newRow = document.createElement("div");
-  newRow.classList.add("card");
+  newRow.classList.add("col-lg-4");
 
   newRow.innerHTML = `
   <h3>${questionText}</h3>
@@ -28,6 +28,8 @@ function displayHistory() {
 
   previousTests.forEach((test) => {
     const newRow = document.createElement("div");
+    const div = document.createElement("div");
+    div.classList.add("col-lg-4");
     newRow.classList.add("card");
 
     newRow.innerHTML = `
@@ -36,6 +38,7 @@ function displayHistory() {
     <p>You made <span class="bold red">${test.errorCount}</span> mistakes</p>
   `;
 
-    histories.appendChild(newRow);
+    div.appendChild(newRow);
+    histories.appendChild(div);
   });
 }
