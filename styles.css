@@ -63,7 +63,7 @@ body {
 }
 #result {
   position: fixed;
-  top: 0%; 
+  top: 10%; 
   left: 35%;
   height: 250px;
   width: 400px;
